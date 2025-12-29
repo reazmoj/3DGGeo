@@ -55,8 +55,8 @@ def main():
     transform_p = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.RandomHorizontalFlip(),  
-        transforms.ToTensor(),            
-        transforms.RandomErasing(p=0.3), 
+        transforms.ToTensor(),             
+        transforms.RandomErasing(p=0.3),
         transforms.Normalize(
             mean=[0.485, 0.456, 0.406],
             std=[0.229, 0.224, 0.225]
@@ -72,9 +72,7 @@ def main():
         )
         person_num_classes, group_num_classes = train_dataset.get_num_classes()
         model = ThreeDTransformer(
-            vit_model='vit_base_patch16_224',
-            pretrained=True,
-            layout_embed_dim=256,
+            embed_dim=args.embed_dim,
             num_heads=args.num_heads,
             num_layers=args.num_layers,
             person_num_classes=person_num_classes,
@@ -200,3 +198,4 @@ def main():
     
 if __name__ == "__main__":
     main()
+
